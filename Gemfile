@@ -7,6 +7,8 @@ source :rubygems
 gem 'rake'
 gem 'rack-flash'
 
+gem 'fog'
+
 # Component requirements
 gem 'sass'
 gem 'haml'

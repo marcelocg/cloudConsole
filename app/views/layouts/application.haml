@@ -1,0 +1,20 @@
+-# encoding: utf-8
+!!! Strict
+%html
+  %head
+    %title= [@title, "UNIFOR - MIA"].compact.join(" | ")
+    = stylesheet_link_tag 'reset', 'application'
+    = javascript_include_tag 'jquery', 'jquery-ujs', 'application'
+    = yield_content :include
+  %body
+    #header
+      %h1 Console de Gerenciamento de Instâncias no AWS
+      %h2 UNIFOR - MIA - Ambientes de Desenvolvimento de Software
+      %ul.menu
+        %li= link_to 'Console', url_for(:console, :index)
+        %li= link_to 'Sobre', url_for(:about)
+    #container
+      #main= yield
+    #footer
+      Copyright &copy; 2011-2011 Marcelo C. Gonçalves | Renata Kalina | Lenilson Pinheiro
+

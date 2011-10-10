@@ -1,0 +1,23 @@
+-# encoding: utf-8
+
+- unless server.state == 'terminated' then
+  %tr
+    %td.first
+      .title= server.tags['Name']
+    %td
+      .type= server.flavor_id
+    %td
+      .date= time_ago_in_words(server.created_at || Time.now) + ' atrás'
+    %td
+      .ip= link_to server.public_ip_address, "http://"+server.public_ip_address + '/' + server.tags['App'], :target => "new"
+    %td
+      .status= if server.state == 'running' then image_tag('bullet-green.png', :height => 24, :title => "Executando") else image_tag('bullet-red.png', :height => 24, :title => "Parada") end
+    %td
+      .actions
+        = link_to image_tag('play.png',  :height => 24, :title => "Executar"),
+            url_for(:console, :run, :id => server.id) unless server.state == 'running'
+        = link_to image_tag('stop-icon.png', :height => 24, :title => "Parar"),
+            url_for(:console, :stop, :id => server.id) if server.state == 'running'
+        = link_to image_tag('terminate-icon.png', :height => 24, :title => "Terminar"),
+            url_for(:console, :terminate, :id => server.id),
+            :confirm	=> 'Tem certeza de que deseja terminar a instância? Todos os dados serão perdidos!' if server.state == 'running' || server.state == 'stopped'

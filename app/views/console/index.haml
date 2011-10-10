@@ -1,0 +1,27 @@
+-# encoding: utf-8
+- @title = "Console de Gerenciamento de Instâncias do AWS"
+
+- form_tag url_for(:console, :add) do
+  #formulario
+    #campos
+      - field_set_tag do
+        #alinhamento
+          = label_tag :instance_name
+          = text_field_tag :instance_name
+        #alinhamento
+          = label_tag :image
+          = select_tag :image, :options => ['Tracks', 'Redmine'], :selected => 'Empty'
+    #botoes
+      - field_set_tag do
+        = image_submit_tag('add.png',  :height => 48, :title => "Adicionar uma instância")
+
+%table.table
+  %tr
+    %th.first="Nome"
+    %th="Tipo"
+    %th="Criada"
+    %th="Endereço IP"
+    %th="Status"
+    %th="Ações"
+  = partial 'console/server', :collection => @servers
+
